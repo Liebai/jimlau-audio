@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Jim Lau - Game Music Designer Portfolio" />
+  <title>Jim Lau · Game Music Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #4d5350;
+      --bg-light: #5a605d;
+      --bg-dark: #3f4542;
+      --text: #ffffff;
+      --text-dim: #c9cfcc;
+      --border: rgba(255, 255, 255, 0.45);
+      --accent: #2e7d5b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .serif { font-family: "Playfair Display", "Noto Serif SC", Georgia, serif; }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 32px; }
+
+    /* 站点头部 */
+    .site-header { text-align: center; padding: 48px 0 32px; }
+    .site-header .name {
+      font-size: 44px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .site-header .title { font-size: 15px; color: var(--text-dim); letter-spacing: 1px; margin-top: 8px; }
+    .social-row { display: flex; justify-content: center; gap: 14px; margin-top: 20px; }
+    .social-row a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg-light);
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
+      transition: opacity 0.15s;
+    }
+    .social-row a:hover { opacity: 0.8; }
+
+    /* 导航菜单 */
+    .main-nav { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .main-nav .container {
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 4px; padding: 0;
+    }
+    .main-nav a {
+      color: #fff; text-decoration: none; font-size: 14px; padding: 16px 20px;
+      letter-spacing: 0.5px; transition: background 0.15s;
+    }
+    .main-nav a:hover { background: var(--bg-light); }
+
+    /* Hero */
+    .hero { padding: 64px 0; }
+    .hero .container {
+      display: grid; grid-template-columns: 1fr 1.1fr; gap: 48px; align-items: center;
+    }
+    @media (max-width: 860px) { .hero .container { grid-template-columns: 1fr; } }
+    .hero h1 { font-size: 40px; font-weight: 600; line-height: 1.2; }
+    .hero .sub { color: var(--text-dim); font-size: 16px; margin-top: 16px; }
+    .hero .sub strong { color: #fff; font-weight: 600; }
+    .hero .sub .big-name {
+      color: #fff;
+      font-weight: 600;
+      font-size: 32px;   /* 正文(16px)的两倍 */
+      line-height: 1.2;
+    }
+    .hero .hero-btns { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; max-width: 340px; }
+    .btn-outline {
+      display: inline-block; padding: 13px 24px;
+      border: 1px solid var(--border); color: #fff; text-decoration: none;
+      font-size: 14px; letter-spacing: 0.5px; text-align: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-outline:hover { background: var(--bg-light); border-color: #fff; }
+
+    .hero-media { background: #111; aspect-ratio: 16 / 9; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-media img.hero-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-media .play {
+      width: 64px; height: 64px; border: 2px solid #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: #fff; cursor: pointer; transition: transform 0.15s;
+    }
+    .hero-media .play:hover { transform: scale(1.08); }
+
+    /* 区块标题 */
+    .section { padding: 56px 0; }
+    .section-title { text-align: center; font-size: 34px; font-weight: 600; margin-bottom: 40px; letter-spacing: 1px; }
+
+    /* 卡片网格 */
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid.grid-vertical { grid-template-columns: 1fr; gap: 32px; }
+    .grid-vertical .video-card {
+      display: grid; grid-template-columns: 240px 1fr; gap: 0 24px;
+      grid-template-areas:
+        "thumb h3"
+        "thumb desc"
+        "thumb more";
+      align-items: center; text-align: left;
+    }
+    .grid-vertical .video-card .thumb { grid-area: thumb; margin: 0; }
+    .grid-vertical .video-card h3 { grid-area: h3; font-size: 20px; margin-top: 0; align-self: end; }
+    .grid-vertical .video-card .desc { grid-area: desc; }
+    .grid-vertical .video-card .more { grid-area: more; align-self: start; }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } .grid-vertical .video-card { grid-template-columns: 1fr; grid-template-areas: "thumb" "h3" "desc" "more"; } .grid-vertical .video-card h3 { margin-top: 14px; } }
+
+    /* 极简列表式（Showcase 用）：小缩略图 + 标题，横线分隔 */
+    .list-showcase { display: flex; flex-direction: column; }
+    .list-showcase .row {
+      display: flex; align-items: center; gap: 20px;
+      padding: 18px 0; border-top: 1px solid rgba(255,255,255,0.14);
+      color: inherit; text-decoration: none;
+    }
+    .list-showcase .row:last-child { border-bottom: 1px solid rgba(255,255,255,0.14); }
+    .list-showcase .row .mini-thumb {
+      width: 96px; height: 64px; flex: 0 0 96px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; overflow: hidden; background-size: cover; background-position: center;
+    }
+    .list-showcase .row .mini-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    /* 歌曲列表：正方形封面缩略图 */
+    #albumsSection .mini-thumb { width: 56px; height: 56px; flex: 0 0 56px; border-radius: 4px; background: #111; }
+    .list-showcase .row .row-title { font-size: 18px; font-weight: 600; color: #fff; }
+    .list-showcase a.row:hover .row-title { text-decoration: underline; }
+    @media (max-width: 560px) { .grid, .grid.cols-2, .grid.grid-vertical { grid-template-columns: 1fr; } }
+
+    .video-card { cursor: pointer; }
+    a.video-card { color: inherit; display: block; text-decoration: none; }
+    a.video-card:hover h3 { color: #fff; }
+    .video-card .thumb {
+      aspect-ratio: 16 / 9; background: #111;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .video-card .thumb .cover {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px; color: rgba(255,255,255,0.9);
+    }
+    .video-card .thumb .play-sm {
+      width: 46px; height: 46px; border: 2px solid #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; color: #fff; background: rgba(0,0,0,0.25); z-index: 2;
+    }
+    .video-card .thumb .duration {
+      position: absolute; right: 8px; bottom: 8px;
+      background: rgba(0,0,0,0.7); font-size: 12px; padding: 2px 6px; z-index: 2;
+    }
+    .video-card h3 { font-size: 16px; font-weight: 600; margin-top: 14px; line-height: 1.4; }
+    .video-card .desc { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+    .video-card .more { color: #fff; font-size: 13px; margin-top: 10px; display: inline-block; text-decoration: underline; }
+
+    .load-more-wrap { text-align: center; margin-top: 40px; }
+    .btn-dark {
+      display: inline-block; background: var(--bg-dark); color: #fff;
+      border: 1px solid var(--border); padding: 13px 40px;
+      font-size: 14px; letter-spacing: 1px; text-decoration: none; transition: background 0.15s;
+    }
+    .btn-dark:hover { background: var(--bg-light); }
+
+    /* 关于我 / 联系 */
+    .about-box { text-align: center; max-width: 760px; margin: 0 auto; }
+    .about-box p { color: var(--text-dim); font-size: 16px; line-height: 1.8; }
+    /* 电台页头（鸣潮先约电台） */
+    .radio-head { display: flex; align-items: center; gap: 28px; margin-bottom: 30px; }
+    .radio-head .radio-avatar {
+      width: 120px; height: 120px; flex: 0 0 120px; border-radius: 50%;
+      object-fit: cover; overflow: hidden; background: #111;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    }
+    .radio-head .radio-info .radio-name { font-family: var(--serif, Georgia, serif); font-size: 34px; font-weight: 600; color: #fff; }
+    .radio-head .radio-info .radio-sub { color: var(--text-dim); font-size: 14px; margin-top: 6px; }
+    .radio-head .radio-links { display: flex; gap: 10px; margin-top: 14px; }
+    .radio-head .radio-links a {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
+      border: 1px solid var(--border, rgba(255,255,255,0.2)); border-radius: 999px;
+      color: #fff; text-decoration: none; font-size: 13px; font-weight: 600;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .radio-head .radio-links a:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+    /* 专辑列表：独立滚动图层 */
+    .album-scroll {
+      max-height: 520px;
+      overflow-y: auto;
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.3) transparent;
+    }
+    .album-scroll::-webkit-scrollbar { width: 8px; }
+    .album-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 4px; }
+    .album-scroll::-webkit-scrollbar-track { background: transparent; }
+    /* 专辑块：封面图 + 专辑名 + 歌曲子目录 */
+    .album-block { margin-bottom: 18px; }
+    .album-head { display: flex; align-items: center; gap: 14px; padding-bottom: 6px; }
+    .album-head .album-cover {
+      width: 52px; height: 52px; flex: 0 0 52px; border-radius: 5px;
+      object-fit: cover; overflow: hidden; background: #111;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .album-head .album-name { font-size: 16px; font-weight: 600; color: #fff; }
+    .album-head .album-count { font-size: 12px; color: var(--text-dim); margin-top: 1px; }
+    /* 专辑下的歌曲子目录（缩进） */
+    .album-songs { padding-left: 66px; display: flex; flex-direction: column; }
+    .song-row {
+      display: flex; align-items: center; gap: 14px; padding: 7px 0;
+      border-top: 1px solid rgba(255,255,255,0.08); color: inherit; text-decoration: none;
+    }
+    .album-songs .song-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .song-row .song-no { width: 24px; flex: 0 0 24px; color: var(--text-dim); font-size: 13px; text-align: center; }
+    .song-row .song-name { font-size: 15px; color: #fff; }
+    a.song-row:hover .song-name { text-decoration: underline; }
+
+    .abilities-box { text-align: center; }
+    .abilities-box .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+    .abilities-box .chip {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff; font-size: 15px;
+      padding: 10px 22px; border-radius: 999px;
+      display: inline-block;
+    }
+    /* 技能/合作方：同一行两块，白线框盒子 */
+    .skill-grid { display: flex; gap: 24px; align-items: stretch; }
+    .skill-card {
+      flex: 1; border: 1px solid rgba(255,255,255,0.5); border-radius: 12px;
+      padding: 28px 20px; text-align: center;
+    }
+    .skill-card .section-title { font-size: 22px; margin-bottom: 22px; }
+    .skill-card .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+    @media (max-width: 640px) { .skill-grid { flex-direction: column; } }
+    .contact-box { text-align: center; }
+    .contact-box .hint { color: var(--text-dim); }
+    .contact-box .email { display: inline-block; margin-top: 16px; color: #fff; font-size: 18px; text-decoration: none; }
+    .contact-box .contact-social { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+    .contact-box .contact-social a {
+      width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.4); border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 13px; text-decoration: none; letter-spacing: 1px;
+    }
+    .contact-box .contact-social a:hover { border-color: #fff; }
+
+    /* 页脚 */
+    footer { border-top: 1px solid var(--border); padding: 48px 0 32px; text-align: center; }
+    footer .email { color: #fff; font-size: 15px; text-decoration: none; }
+    footer .copy { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+
+    /* 悬浮聊天按钮 */
+    .chat-fab {
+      position: fixed; right: 24px; bottom: 24px;
+      background: var(--accent); color: #fff; border-radius: 30px;
+      padding: 14px 24px; font-size: 14px;
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      transition: transform 0.15s; z-index: 50;
+    }
+    .chat-fab:hover { transform: translateY(-2px); }
+
+    /* 专辑展示 */
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 28px;
+    }
+    .album-card {
+      background: var(--bg-dark);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+    .album-card:hover { transform: translateY(-3px); border-color: #fff; }
+    .album-cover {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      background: #111;
+      object-fit: cover;
+      display: block;
+    }
+    .album-body { padding: 18px; }
+    .album-body .album-name {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .album-body .song-list { list-style: none; }
+    .album-body .song-list li { margin-bottom: 6px; }
+    .album-body .song-list a {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .album-body .song-list a:hover { color: #fff; }
+    .album-body .song-list a .note {
+      color: var(--text-dim);
+      opacity: 0.6;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="name serif" id="siteName"></div>
+      <div class="title" id="siteTitle"></div>
+      <div class="social-row" id="socialRow"></div>
+    </div>
+  </header>
+
+  <nav class="main-nav">
+    <div class="container" id="navLinks"></div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div id="heroLeft"></div>
+      <div class="hero-media" id="heroMedia"></div>
+    </div>
+  </section>
+
+  <section class="section" id="tutorials">
+    <div class="container" id="tutorialsSection"></div>
+  </section>
+
+  <section class="section" id="albums">
+    <div class="container" id="albumsSection"></div>
+  </section>
+
+  <section class="section" id="abilities">
+    <div class="container abilities-box">
+      <div class="skill-grid">
+        <div class="skill-card" id="abilitiesSection"></div>
+        <div class="skill-card" id="partnersSection"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container contact-box" id="contactSection"></div>
+  </section>
+
+  <footer>
+    <div class="container" id="footerBox"></div>
+  </footer>
+
+  <a class="chat-fab" id="chatFab" href="#"></a>
+
+  <script src="data.js"></script>
+  <script>
+    const D = SITE_DATA;
+
+    // 页面标题 & meta
+    document.title = D.site.browserTitle;
+    document.querySelector('meta[name="description"]').content = D.site.description;
+
+    // 站点头部
+    document.getElementById('siteName').textContent = D.site.name;
+    document.getElementById('siteTitle').textContent = D.site.title;
+    const socialRow = document.getElementById('socialRow');
+    D.socials.forEach(s => {
+      const a = document.createElement('a');
+      a.href = s.url || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.title = s.label;
+      a.textContent = s.label;
+      socialRow.appendChild(a);
+    });
+
+    // 导航
+    const navLinks = document.getElementById('navLinks');
+    [['Home', '#home']].concat(D.nav.map(n => [n.label, '#' + n.id])).forEach(([label, href]) => {
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = label;
+      navLinks.appendChild(a);
+    });
+
+    // Hero
+    const heroLeft = document.getElementById('heroLeft');
+    heroLeft.innerHTML =
+      '<h1 class="serif"></h1>' +
+      '<p class="sub"></p>' +
+      '<div class="hero-btns"></div>';
+    // 标题为空则不显示 h1
+    if (D.hero.heading) {
+      heroLeft.querySelector('h1').textContent = D.hero.heading;
+    } else {
+      heroLeft.querySelector('h1').style.display = 'none';
+    }
+    heroLeft.querySelector('.sub').innerHTML = D.hero.subtext;
+    const heroBtns = heroLeft.querySelector('.hero-btns');
+    if (D.hero.buttons && D.hero.buttons.length > 0) {
+      D.hero.buttons.forEach(b => {
+        const a = document.createElement('a');
+        a.className = 'btn-outline';
+        a.href = b.href;
+        a.textContent = b.label;
+        heroBtns.appendChild(a);
+      });
+    } else {
+      heroBtns.style.display = 'none';
+    }
+
+    // Hero 右侧头像图片
+    const heroMedia = document.getElementById('heroMedia');
+    if (D.hero.image) {
+      const img = document.createElement('img');
+      img.className = 'hero-photo';
+      img.src = D.hero.image;
+      img.alt = D.site.name;
+      heroMedia.appendChild(img);
+    } else {
+      heroMedia.innerHTML = '<div class="play" title="Play demo video">▶</div>';
+    }
+
+    // 卡片生成函数
+    function makeCard(item) {
+      const card = document.createElement('div');
+      card.className = 'video-card';
+      const inner =
+        '<div class="thumb">' +
+          '<div class="cover" style="background:linear-gradient(135deg,' + (item.color[0] || '#333') + ',' + (item.color[1] || '#111') + ');">' + (item.emoji || '') + '</div>' +
+          '<div class="play-sm">▶</div>' +
+          (item.duration ? '<span class="duration">' + item.duration + '</span>' : '') +
+        '</div>' +
+        '<h3></h3>' +
+        '<p class="desc"></p>' +
+        '<span class="more">Read More</span>';
+      card.innerHTML = inner;
+      card.querySelector('h3').textContent = item.title;
+      card.querySelector('.desc').textContent = item.desc;
+
+      // 有链接则整卡可点击
+      if (item.url) {
+        const a = document.createElement('a');
+        a.className = 'video-card';
+        a.href = item.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.innerHTML = card.innerHTML;
+        return a;
+      }
+      return card;
+    }
+
+    function renderSection(containerId, data, layout) {
+      const box = document.getElementById(containerId);
+      const grid = document.createElement('div');
+      grid.className = layout === 'cols-2' ? 'grid cols-2' : (layout === 'vertical' ? 'grid grid-vertical' : 'grid');
+      data.items.forEach(it => grid.appendChild(makeCard(it)));
+      box.appendChild(document.createElement('h2')).className = 'section-title serif';
+      box.querySelector('h2').textContent = data.title;
+      box.appendChild(grid);
+      if (data.loadMore) {
+        const wrap = document.createElement('div');
+        wrap.className = 'load-more-wrap';
+        wrap.innerHTML = '<a class="btn-dark" href="#' + containerId.replace('Section', '') + '">Load More</a>';
+        box.appendChild(wrap);
+      }
+    }
+
+    // 极简列表式渲染（Showcase 用）
+    function renderListShowcase(containerId, data) {
+      const box = document.getElementById(containerId);
+      box.appendChild(document.createElement('h2')).className = 'section-title serif';
+      box.querySelector('h2').textContent = data.title;
+      const list = document.createElement('div');
+      list.className = 'list-showcase';
+      data.items.forEach(function(it) {
+        const row = document.createElement(it.url ? 'a' : 'div');
+        row.className = 'row';
+        if (it.url) { row.href = it.url; row.target = '_blank'; row.rel = 'noopener'; }
+        const thumbInner = it.thumb
+          ? '<img src="' + it.thumb + '" alt="" loading="lazy" />'
+          : (it.emoji || '');
+        row.innerHTML =
+          '<div class="mini-thumb" style="background:linear-gradient(135deg,' + (it.color[0] || '#333') + ',' + (it.color[1] || '#111') + ');">' + thumbInner + '</div>' +
+          '<span class="row-title"></span>';
+        row.querySelector('.row-title').textContent = it.title;
+        list.appendChild(row);
+      });
+      box.appendChild(list);
+    }
+
+    renderListShowcase('tutorialsSection', D.tutorials);
+
+    // 电台页（鸣潮先约电台）：页头头像 + 按专辑分组的歌曲列表
+    (function renderAlbums() {
+      const box = document.getElementById('albumsSection');
+
+      // 页头：左侧头像 + 右侧标题
+      const head = document.createElement('div');
+      head.className = 'radio-head';
+      let linksHtml = '';
+      if (D.albums.links && D.albums.links.length) {
+        linksHtml = '<div class="radio-links">' + D.albums.links.map(function(l) {
+          return '<a href="' + l.url + '" target="_blank" rel="noopener" title="' + l.label + '">' + l.label + '</a>';
+        }).join('') + '</div>';
+      }
+      head.innerHTML =
+        '<img class="radio-avatar" src="' + D.albums.avatar + '" alt="' + D.albums.title + '" />' +
+        '<div class="radio-info">' +
+          '<div class="radio-name">' + D.albums.title + '</div>' +
+          '<div class="radio-sub">' + (D.albums.subtitle || '') + '</div>' +
+          linksHtml +
+        '</div>';
+      box.appendChild(head);
+
+      // 歌曲列表：按专辑分组，每张专辑一个封面图 + 歌曲子目录（独立滚动图层）
+      const rows = document.createElement('div');
+      rows.className = 'album-scroll';
+      let no = 1;
+      D.albums.items.forEach(function(album) {
+        const block = document.createElement('div');
+        block.className = 'album-block';
+
+        // 专辑头：封面图 + 专辑名
+        const head = document.createElement('div');
+        head.className = 'album-head';
+        head.innerHTML =
+          '<img class="album-cover" src="' + album.cover + '" alt="' + album.name + '" loading="lazy" />' +
+          '<div>' +
+            '<div class="album-name"></div>' +
+            '<div class="album-count">' + album.songs.length + ' songs</div>' +
+          '</div>';
+        head.querySelector('.album-name').textContent = album.name;
+        block.appendChild(head);
+
+        // 歌曲子目录
+        const songList = document.createElement('div');
+        songList.className = 'album-songs';
+        album.songs.forEach(function(s) {
+          const row = document.createElement('a');
+          row.className = 'song-row';
+          row.href = s.url;
+          row.target = '_blank';
+          row.rel = 'noopener';
+          row.innerHTML =
+            '<span class="song-no">' + (no < 10 ? '0' + no : no) + '</span>' +
+            '<span class="song-name"></span>';
+          row.querySelector('.song-name').textContent = s.name;
+          songList.appendChild(row);
+          no++;
+        });
+        block.appendChild(songList);
+        rows.appendChild(block);
+      });
+      box.appendChild(rows);
+    })();
+
+    // 能力 / 技能（胶囊标签）
+    (function renderAbilities() {
+      const box = document.getElementById('abilitiesSection');
+      box.appendChild(document.createElement('h2')).className = 'section-title serif';
+      box.querySelector('h2').textContent = D.abilities.title;
+      const chips = document.createElement('div');
+      chips.className = 'chips';
+      D.abilities.items.forEach(function(t) {
+        const span = document.createElement('span');
+        span.className = 'chip';
+        span.textContent = t;
+        chips.appendChild(span);
+      });
+      box.appendChild(chips);
+    })();
+
+    // 合作方（胶囊标签）
+    (function renderPartners() {
+      const box = document.getElementById('partnersSection');
+      box.appendChild(document.createElement('h2')).className = 'section-title serif';
+      box.querySelector('h2').textContent = D.partners.title;
+      const chips = document.createElement('div');
+      chips.className = 'chips';
+      D.partners.items.forEach(function(t) {
+        const span = document.createElement('span');
+        span.className = 'chip';
+        span.textContent = t;
+        chips.appendChild(span);
+      });
+      box.appendChild(chips);
+    })();
+
+    // 联系
+    document.getElementById('contactSection').innerHTML =
+      '<h2 class="section-title serif"></h2>' +
+      '<p class="hint"></p>' +
+      '<a class="email" href="mailto:' + D.contact.email + '"></a>' +
+      '<div class="contact-social"></div>';
+    document.getElementById('contactSection').querySelector('h2').textContent = D.contact.title;
+    if (D.contact.text) {
+      document.getElementById('contactSection').querySelector('.hint').textContent = D.contact.text;
+    } else {
+      document.getElementById('contactSection').querySelector('.hint').style.display = 'none';
+    }
+    document.getElementById('contactSection').querySelector('.email').textContent = D.contact.email;
+    // 邮箱下方的社交链接
+    const contactSocial = document.getElementById('contactSection').querySelector('.contact-social');
+    D.socials.forEach(function(s) {
+      const a = document.createElement('a');
+      a.href = s.url || '#';
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = s.label;
+      contactSocial.appendChild(a);
+    });
+
+    // 页脚 + 悬浮按钮
+    document.getElementById('footerBox').innerHTML =
+      '<a class="email" href="mailto:' + D.contact.email + '">' + D.contact.email + '</a>' +
+      '<div class="copy">' + D.footer.copyright + '</div>';
+    const fab = document.getElementById('chatFab');
+    fab.href = 'mailto:' + D.contact.email;
+    fab.innerHTML = '<span>💬</span> ' + D.footer.chatLabel;
+  </script>
+</body>
+</html>

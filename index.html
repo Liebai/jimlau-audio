@@ -7,7 +7,7 @@
   <title>Jim Lau — Game Music Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     @font-face { font-family:"Futura Local"; src:url("./FuturaStd-Light.otf") format("opentype"); font-style:normal; font-weight:300; font-display:swap; }
     @font-face { font-family:"Futura Local"; src:url("./FuturaStd-Bold.otf") format("opentype"); font-style:normal; font-weight:700; font-display:swap; }
@@ -19,8 +19,8 @@
     .wrap { width:min(var(--max),calc(100% - 48px)); margin:auto; }
     .eyebrow { color:var(--ink); font:500 12px/1 "DM Mono",monospace; letter-spacing:.18em; text-transform:uppercase; }
     .site-header { position:fixed; inset:0 0 auto; z-index:20; background:#fff; color:#000; }
-    .header-inner { min-height:122px; display:flex; align-items:flex-start; justify-content:space-between; gap:24px; padding-top:18px; }
-    .brand { display:block; padding:14px 26px 16px; background:#fff; color:#000; text-decoration:none; font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-size:50px; line-height:.95; font-weight:300; letter-spacing:-.06em; text-transform:uppercase; }
+    .header-inner { position:relative; min-height:122px; display:flex; align-items:flex-start; justify-content:flex-start; gap:24px; padding-top:18px; }
+    .brand { display:block; align-self:center; padding:14px 26px 16px; background:#fff; color:#000; text-decoration:none; font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-size:50px; line-height:.95; font-weight:300; letter-spacing:-.06em; text-transform:uppercase; }
     .brand-mark { display:none; }
     .brand::after { content:none; }
     .nav { display:grid; grid-template-columns:repeat(2,128px); gap:16px 18px; padding:18px 26px 20px; background:#fff; }
@@ -32,7 +32,7 @@
     .hero .eyebrow { display:none; }
     h1,h2,h3,p { margin:0; }
     h1 { display:none; }
-    .hero-copy { width:520px; margin:0 0 0 10px; align-self:center; color:#a7a7a7; font-size:19px; line-height:1.22; transform:skewX(-4deg); transform-origin:left center; }
+    .hero-copy { width:520px; margin:0 0 0 10px; align-self:center; color:#a7a7a7; font-size:19px; line-height:1.22; transform:none; }
     .pdf-copy p { margin:0 0 24px; white-space:nowrap; }
     .pdf-copy p:last-child { margin-bottom:0; }
     .pdf-copy .line { display:block; }
@@ -90,7 +90,10 @@
     .platforms a { color:var(--ink); border-bottom:1px solid rgba(255,255,255,.4); text-decoration:none; font:12px "DM Mono",monospace; }
     .soundtrack-list { position:relative; border-top:1px solid var(--line); }
     .soundtrack-tools { display:flex; justify-content:flex-end; align-items:center; gap:24px; margin:0 0 4px auto; }
-    .soundtrack-tools a { padding:5px 8px; border:1px solid var(--line); color:var(--ink); text-decoration:none; font:300 12px "Futura Local","DM Sans",system-ui,sans-serif; }
+    .soundtrack-tools a { padding:5px 8px; border:0; color:var(--ink); text-decoration:none; font:300 12px "Futura Local","DM Sans",system-ui,sans-serif; }
+    .soundtrack-tools img { display:block; width:auto; max-width:118px; height:34px; object-fit:contain; background:transparent; }
+    .soundtrack-tools a:first-child img { transform:translateY(2px); }
+    .soundtrack-tools a:last-child img { max-width:153px; height:44px; }
     .soundtrack-tools a:first-child:hover,.soundtrack-tools a:first-child:focus-visible { color:#fff; border-color:#fff; }
     .soundtrack-tools a:last-child:hover,.soundtrack-tools a:last-child:focus-visible { color:#fff; border-color:#fff; }
     .soundtrack-row { position:relative; min-height:62px; display:flex; flex-direction:column; justify-content:center; padding:12px 0 12px 32px; border-bottom:1px solid var(--line); will-change:min-height,padding,transform; transition:min-height .42s ease,padding .42s ease,color .36s ease,transform .5s cubic-bezier(.22,.61,.36,1); }
@@ -120,14 +123,23 @@
     #about .fact h3 { margin:0 0 16px; color:var(--ink); font:300 22px/1 "Futura Local","DM Sans",system-ui,sans-serif; letter-spacing:-.04em; text-transform:uppercase; }
     #about .fact:first-child { order:2; }
     #about .fact:last-child { order:1; }
+    #about .fact:first-child .chip:last-child { margin-top:12px; padding:10px 14px; font-size:16px; }
+    #about .fact:first-child .chip:nth-child(-n+4) { transform:translateY(12px); }
+    #about .fact:first-child h3 { font-size:24px; }
+    #about .fact:first-child .chip { font-size:16px; }
+    #about .fact:first-child .chips { flex-wrap:nowrap; align-items:center; gap:20px; }
+    #about .fact:first-child .chip { margin-top:0; padding:10px 14px; transform:none; white-space:nowrap; line-height:1; }
+    #about .fact:first-child .chip:last-child { transform:translateY(6px); }
     #about .fact:last-child h3 { display:block; }
     #about .chips { justify-content:flex-start; gap:8px; margin-top:0; }
-    #about .chip { min-width:0; padding:9px 12px; border:1px solid var(--ink); color:var(--ink); font-size:14px; transition:color .2s ease,border-color .2s ease,background .2s ease; }
+    #about .chip { min-width:0; padding:9px 12px; border:0; color:var(--ink); font-size:14px; transition:color .2s ease,border-color .2s ease,background .2s ease; }
     #about .chip:hover,#about .chip:focus-visible { color:#fff; border-color:#fff; background:transparent; }
     #about .fact:first-child .chip:nth-child(even):hover,#about .fact:first-child .chip:nth-child(even):focus-visible { color:var(--accent); border-color:var(--accent); }
     #about .fact:last-child .chip:nth-child(2):hover,#about .fact:last-child .chip:nth-child(2):focus-visible { color:var(--accent); border-color:var(--accent); }
     .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
     .chip { padding:8px 12px; border:1px solid var(--line); color:var(--muted); font-size:13px; }
+    #about .partner-image { display:block; width:auto; max-width:128px; height:42px; object-fit:contain; object-position:center; }
+    #about .fact:last-child .chip:nth-child(2) .partner-image { width:auto; max-width:128px; height:42px; }
     .contact { position:relative; display:flex; min-height:420px; align-items:center; justify-content:center; overflow:hidden; text-align:center; background:#000; }
     #contact, #contact .contact-content, #contact .contact-title, #contact .contact-link { font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-weight:300; }
     .contact::before { content:""; position:absolute; inset:0; background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.44)),url("contact-piano.jpg") center/cover no-repeat; filter:grayscale(1) contrast(1.08) brightness(.78); }
@@ -144,12 +156,25 @@
     footer { padding:30px 0 44px; color:var(--muted); font:300 14px "Futura Local","DM Sans",system-ui,sans-serif; }
     footer .wrap { display:flex; justify-content:space-between; gap:20px; }
     .footer-links { display:flex; gap:8px; }
-    .footer-links a { display:inline-flex; min-width:48px; height:32px; align-items:center; justify-content:center; border:1px solid var(--line); color:var(--ink); text-decoration:none; font:700 14px/1 "Futura Local","DM Sans",system-ui,sans-serif; }
+    .footer-links a { display:inline-flex; min-width:48px; height:32px; align-items:center; justify-content:center; border:0; color:var(--ink); text-decoration:none; font:700 14px/1 "Futura Local","DM Sans",system-ui,sans-serif; }
     .footer-links svg { display:block; width:22px; height:18px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
-    .footer-links a:first-child svg { width:25px; height:18px; fill:currentColor; stroke:none; }
+    .footer-links img { display:block; width:auto; max-width:38px; height:30px; object-fit:contain; background:transparent; }
+    .footer-links a:first-child svg { width:25px; height:18px; fill:#00aeec; stroke:none; }
+    .footer-links a:first-child svg circle { fill:#fff; }
+    .footer-links a:first-child svg path:last-child { fill:none; stroke:#fff; }
     .footer-links a:first-child:hover,.footer-links a:first-child:focus-visible { color:#fff; border-color:#fff; }
     .footer-links a:last-child:hover,.footer-links a:last-child:focus-visible { color:#fff; border-color:#fff; }
+    .language-switch { position:absolute; top:40px; right:24px; display:flex; align-items:center; gap:4px; }
+    .language-switch button { border:0; background:#fff; color:#000; padding:5px 6px; font:300 12px/1 "Futura Local","DM Sans",system-ui,sans-serif; cursor:pointer; }
+    .language-switch button.is-active,.language-switch button:hover,.language-switch button:focus-visible { background:#000; color:#fff; }
+    html.lang-zh body, html.lang-zh body *:not(svg) { font-family:"Shippori Mincho",serif !important; }
     .nav-toggle { display:none; }
+    @media (max-width:720px) {
+      .header-inner { flex-wrap:wrap; align-items:center; }
+      .language-switch { top:18px; right:0; }
+      #about .fact:first-child .chips { flex-wrap:wrap; gap:8px; }
+      #about .fact:first-child .chip:last-child { transform:none; }
+    }
   </style>
 </head>
 <body>
@@ -160,6 +185,7 @@
       <nav class="nav" id="site-nav" aria-label="Primary navigation">
         <a href="#work">Works</a><a href="#work">Showcase</a><a href="#about">About</a><a href="#contact">Contact</a>
       </nav>
+      <div class="language-switch" aria-label="Language switcher"><button type="button" data-language="zh">CN</button><button type="button" data-language="en">EN</button></div>
     </div>
   </header>
   <main id="top">
@@ -197,7 +223,7 @@
       </div>
     </section>
     <section class="section" id="soundtrack">
-      <div class="wrap"><div class="section-head"><div><h2>Works</h2></div><div class="soundtrack-tools"><a href="https://music.163.com/#/artist?id=99416268" target="_blank" rel="noopener">网易云音乐</a><a href="https://open.spotify.com/artist/73y4hiJn32VtQa4zaPvgGQ" target="_blank" rel="noopener">Spotify</a></div></div>
+      <div class="wrap"><div class="section-head"><div><h2>Works</h2></div><div class="soundtrack-tools"><a href="https://music.163.com/#/artist?id=99416268" target="_blank" rel="noopener" aria-label="网易云音乐"><img src="netease-cloud-logo-transparent.png" alt="网易云音乐" /></a><a href="https://open.spotify.com/artist/73y4hiJn32VtQa4zaPvgGQ" target="_blank" rel="noopener" aria-label="Spotify"><img src="spotify-logo-transparent.png" alt="Spotify" /></a></div></div>
         <div class="soundtrack-layout" data-active="">
           <div>
             <div class="soundtrack-preview-stack" aria-label="Album previews">
@@ -232,10 +258,10 @@
         </div>
       </div>
     </section>
-    <section class="section" id="about"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Practice &amp; collaboration</div><h2>About the work</h2></div><p class="section-intro">From the first sketch to the final mix, music is treated as part of the game's design language.</p></div><div class="facts"><div class="fact"><h3>Abilities</h3><div class="chips"><span class="chip">Ableton</span><span class="chip">Cubase</span><span class="chip">Mixing</span><span class="chip">Jazz piano</span><span class="chip">English / Deutsch</span></div></div><div class="fact"><h3>Partners</h3><div class="chips"><span class="chip">Wuthering Waves</span><span class="chip">Dove</span><span class="chip">Huawei</span><span class="chip">Shangri-La — Band Coordination</span></div></div></div></div></section>
+    <section class="section" id="about"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Practice &amp; collaboration</div><h2>About the work</h2></div><p class="section-intro">From the first sketch to the final mix, music is treated as part of the game's design language.</p></div><div class="facts"><div class="fact"><h3>Abilities</h3><div class="chips"><span class="chip">Ableton</span><span class="chip">Cubase</span><span class="chip">Mixing</span><span class="chip">Jazz piano</span><span class="chip">English / Deutsch</span></div></div><div class="fact"><h3>Partners</h3><div class="chips"><span class="chip"><img class="partner-image" src="wuthering-waves-logo-transparent.png" alt="Wuthering Waves" /></span><span class="chip"><img class="partner-image" src="dove-logo-new.png" alt="Dove" /></span><span class="chip"><img class="partner-image" src="huawei-logo-transparent.png" alt="Huawei" /></span><span class="chip"><img class="partner-image" src="shangri-la-logo.png" alt="Shangri-La" /></span></div></div></div></div></section>
     <section class="section" id="contact"><div class="wrap contact"><div class="contact-content"><h2 class="contact-title">Contact</h2><div class="contact-links"><a class="contact-link" href="mailto:liujunyi.lb@foxmail.com">liujunyi.lb@foxmail.com</a></div></div></div></section>
   </main>
-  <footer><div class="wrap"><span>© 2026 Jim Lau · Game Design</span><span class="footer-links"><a href="https://space.bilibili.com/1533479443" target="_blank" rel="noopener" aria-label="Bilibili"><svg viewBox="0 0 64 40" aria-hidden="true"><path d="M16 8 10 2m38 6 6-6M8 13h48v19a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5V13Z"/><circle cx="24" cy="24" r="3" fill="#000"/><circle cx="40" cy="24" r="3" fill="#000"/><path d="M18 32h28" stroke="#000" stroke-width="3"/></svg></a><a href="https://www.instagram.com/liujunyileo/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></span></div></footer>
+  <footer><div class="wrap"><span>© 2026 Jim Lau · Game Music Design</span><span class="footer-links"><a href="https://space.bilibili.com/1533479443" target="_blank" rel="noopener" aria-label="Bilibili"><img src="bilibili.svg" alt="Bilibili" /></a><a href="https://www.instagram.com/liujunyileo/" target="_blank" rel="noopener" aria-label="Instagram"><img src="instagram-logo-transparent.png" alt="Instagram" /></a></span></div></footer>
   <script>
     const toggle = document.querySelector('.nav-toggle'); const nav = document.querySelector('.nav');
     toggle.addEventListener('click', () => { const open = nav.classList.toggle('is-open'); toggle.setAttribute('aria-expanded', String(open)); });
@@ -275,6 +301,93 @@
       row.addEventListener('focusin', () => activateAlbum(index));
       row.addEventListener('focusout', event => { if (!row.contains(event.relatedTarget)) deactivateAlbum(); });
     });
+    const languageButtons = document.querySelectorAll('[data-language]');
+    const showcaseTranslations = {
+      zh: [
+        ['01 / 游戏音乐','鸣潮 — 褪色的往昔','TGA 获奖项目的电影化音乐设计。'],
+        ['02 / 教学','爵士钢琴分析与即兴','关于 McCoy Tyner、和声与即兴学习的公开课。'],
+        ['03 / 编曲扒谱','Mollo — Anomalie','融合新爵士、嘻哈与融合音乐的个人扒谱。'],
+        ['04 / 动画','尘归尘','动画短片原创音乐，前名《Song of Spring》。']
+      ],
+      en: [
+        ['01 / GAME MUSIC','Wuthering Waves — Faded Colors of the Past','Cinematic music design for a TGA award-winning project.'],
+        ['02 / EDUCATION','Jazz piano analysis & improvisation','An open class on McCoy Tyner, harmony and learning to improvise.'],
+        ['03 / TRANSCRIPTION','Mollo — Anomalie','A self-made transcription blending neo-jazz, hip-hop and fusion.'],
+        ['04 / ANIMATION','Dust to Dust','Original music for an animated short film, formerly Song of Spring.']
+      ]
+    };
+    const worksTranslations = {
+      zh: [
+        ['梦中花',['脱下蓝色衣装的黎明']],
+        ['旧夜群星闪耀时',['愿予你安然一梦','前路广阔','落日尽头的森林']],
+        ['待到风雪止息',['风雪同行','与你，永不完结','风雪同行（Instrumental）','闲适时光']],
+        ['若期待鎏金',['解臻幻想之境','庆典爱丽丝','解臻幻想之境（Instrumental）','被颠倒的幻想']],
+        ['飞向春天',['星辉的安眠曲（逆序主题）','沉默的守望','巨人安眠之地']],
+        ['朝月听尘',['锦灯游夜','雾深不知处']],
+        ['壳中的摇篮曲',['被拼凑的心']],
+        ['二次日出',['新日','星光不应坠落','若是再见']],
+        ['废都的破晓',['好天气营业中','奔赴终焉之地','无序在延展']],
+        ['万声弥新',['孤城遥黛','别君三日，如隔千秋','箫鼓追随春社近','踏梦逐幽','伏截剿绝']],
+        ['烬夜启明',['地狱穿行','暗流隐现','覆潮启兆']],
+        ['云山况是客中过',['梧叶中']]
+      ],
+      en: [
+        ['Flowers in a Dream',['The Dawn That Sheds Its Blue']],
+        ['Beneath the Stars of the Old Night',['A Peaceful Dream for You','The Road Ahead',"Forest at Sunset's End"]],
+        ['Until the Snow Settles',['Walking Through Wind and Snow','Forever with You','Walking Through Wind and Snow (Instrumental)','Leisurely Moments']],
+        ['Gilded Expectations',['A Fantasy Unraveled','Alice at the Celebration','A Fantasy Unraveled (Instrumental)','A Fantasy Turned Upside Down']],
+        ['Fly Toward Spring',['Starlit Lullaby (Reverse Theme)','Silent Watch','Where the Giant Sleeps']],
+        ['Songs for the Waking Moon',['Lanterns on a Night Journey','Lost in the Mist']],
+        ['Lullaby in the Shell',['A Patchwork Heart']],
+        ['Second Sunrise',['New Day','Starlight Should Not Fall','Until We Meet Again']],
+        ['Dawn over the Ruins',['Good Weather, Open for Business','Journey to the End','Disorder Unfolding']],
+        ['Myriad Notes, Ever New',['A Solitary City, Far Away','Three Days Apart, a Thousand Autumns','Drums Follow the Spring','Chasing Dreams Through the Twilight','Vanquishing the Ambush']],
+        ['Dawn Breaks',['Hellstride','Dark Currents Emerge','Tidebreak Omen']],
+        ['Traveler over the Mountains',['Among the Wutong Leaves']]
+      ]
+    };
+    const applyLanguage = language => {
+      const zh = language === 'zh';
+      document.documentElement.lang = zh ? 'zh-CN' : 'en';
+      document.documentElement.classList.toggle('lang-zh', zh);
+      document.title = zh ? 'Jim Lau — 游戏音乐设计师' : 'Jim Lau — Game Music Designer';
+      document.querySelectorAll('.nav a').forEach((link, index) => { link.textContent = (zh ? ['作品','展示','关于','联系'] : ['Works','Showcase','About','Contact'])[index]; });
+      document.querySelector('.hero .eyebrow').textContent = zh ? '游戏作曲 / 音乐设计' : 'Game composer / Music designer';
+      document.querySelector('.hero h1').textContent = zh ? '让世界拥有脉搏的音乐。' : 'Music that gives worlds a pulse.';
+      document.querySelector('.pdf-copy').innerHTML = zh
+        ? '<p><span class="line"><span class="green">Jim Lau</span> 是一名游戏作曲家，曾参与 <strong>TGA</strong> 获奖项目</span><span class="line">他是一名关卡音乐设计师、爵士钢琴家和教育者。</span></p><p><span class="line">毕业于 <strong>Hamburg Konservatorium</strong>，现将爵士、古典与混合游戏音乐融合，</span><span class="line">设计经验涵盖演奏、关卡流程与战斗。</span><span class="line">他的主要项目是 <strong>Wuthering Waves</strong>。</span></p>'
+        : '<p><span class="line"><span class="green">Jim Lau</span> is a game composer who has worked on <strong>TGA</strong></span><span class="line">award-winning projects. He is a level music designer,</span><span class="line">jazz pianist, and educator.</span></p><p><span class="line">A graduate of <strong>Hamburg Konservatorium</strong>, he now</span><span class="line">blends jazz, classical, and hybrid game music, with</span><span class="line">design experience spanning performance, level flow,</span><span class="line">and combat. His main project is <strong>Wuthering Waves</strong>.</span></p>';
+      const heroButtons = document.querySelectorAll('.hero-actions a');
+      heroButtons[0].textContent = zh ? '查看精选作品' : 'Explore selected work';
+      heroButtons[1].textContent = zh ? '开始交流' : 'Start a conversation';
+      document.querySelector('#work h2').textContent = zh ? '展示' : 'Showcase';
+      document.querySelector('#work .section-intro').textContent = zh ? '涵盖游戏、电影与现场演出的音乐、分析和影像作品精选。' : 'A selection of music, analysis and moving-image work across games, film and performance.';
+      document.querySelectorAll('.work-card').forEach((card, index) => {
+        const item = showcaseTranslations[language][index];
+        card.querySelector('.work-number').textContent = item[0];
+        card.querySelector('h3').textContent = item[1];
+        card.querySelector('p').textContent = item[2];
+      });
+      document.querySelectorAll('.soundtrack-row').forEach((row, index) => {
+        const item = worksTranslations[language][index];
+        row.querySelector('h3').textContent = item[0];
+        row.querySelectorAll('.soundtrack-songs a').forEach((song, songIndex) => { song.textContent = item[1][songIndex]; });
+      });
+      document.querySelector('#soundtrack h2').textContent = zh ? '作品' : 'Works';
+      document.querySelector('#about .section-head .eyebrow').textContent = zh ? '实践与合作' : 'Practice & collaboration';
+      document.querySelector('#about .section-head h2').textContent = zh ? '关于工作' : 'About the work';
+      document.querySelector('#about .section-intro').textContent = zh ? '从最初的草稿到最终混音，音乐始终是游戏设计语言的一部分。' : "From the first sketch to the final mix, music is treated as part of the game's design language.";
+      const factTitles = document.querySelectorAll('#about .fact h3');
+      factTitles[0].textContent = zh ? '专业技能' : 'Abilities';
+      factTitles[1].textContent = zh ? '合作伙伴' : 'Partners';
+      const abilityLabels = zh ? ['Ableton','Cubase','混音','爵士钢琴','英语 / 德语'] : ['Ableton','Cubase','Mixing','Jazz piano','English / Deutsch'];
+      document.querySelectorAll('#about .fact:first-child .chip').forEach((chip, index) => { chip.textContent = abilityLabels[index]; });
+      document.querySelector('#contact .contact-title').textContent = zh ? '联系方式' : 'Contact';
+      document.querySelector('footer .wrap > span:first-child').textContent = zh ? '© 2026 Jim Lau · 游戏音乐设计' : '© 2026 Jim Lau · Game Music Design';
+      languageButtons.forEach(button => button.classList.toggle('is-active', button.dataset.language === language));
+    };
+    languageButtons.forEach(button => button.addEventListener('click', () => applyLanguage(button.dataset.language)));
+    applyLanguage('zh');
   </script>
 </body>
 </html>

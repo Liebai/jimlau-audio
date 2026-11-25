@@ -64,10 +64,10 @@
     .work-number { color:var(--ink); font:12px "DM Mono",monospace; }
     .work-card h3 { max-width:520px; margin-top:12px; font-size:22px; line-height:1.15; }
     .work-card p { max-width:500px; margin-top:10px; color:var(--muted); font-size:13px; }
-    .soundtrack-layout { display:grid; grid-template-columns:minmax(300px,.9fr) minmax(0,1.55fr); gap:0; min-height:744px; align-items:start; }
+    .soundtrack-layout { display:grid; grid-template-columns:minmax(300px,.9fr) minmax(0,1.55fr); gap:0; min-height:744px; align-items:start; transition:min-height .95s cubic-bezier(.22,.61,.36,1); }
     .soundtrack-layout[data-active]:not([data-active=""]) { min-height:1062px; }
     .soundtrack-preview-stack { position:relative; min-height:744px; }
-    .soundtrack-preview { position:absolute; left:0; right:0; width:100%; height:62px; object-fit:cover; object-position:center top; border:0; filter:grayscale(.55) contrast(1.08) brightness(.78); box-shadow:0 10px 22px rgba(0,0,0,.25); transition:top .42s ease,height .42s ease,filter .36s ease,transform .36s ease; }
+    .soundtrack-preview { position:absolute; left:0; right:0; width:100%; height:62px; object-fit:cover; object-position:center top; border:0; filter:grayscale(.55) contrast(1.08) brightness(.78); box-shadow:0 10px 22px rgba(0,0,0,.25); will-change:height,transform; contain:paint; backface-visibility:hidden; transition:height .5s cubic-bezier(.22,.61,.36,1),transform .5s cubic-bezier(.22,.61,.36,1),filter .18s ease; }
     .soundtrack-preview[data-preview="1"] { top:0; z-index:6; }
     .soundtrack-preview[data-preview="2"] { top:62px; z-index:5; }
     .soundtrack-preview[data-preview="3"] { top:124px; z-index:4; }
@@ -93,7 +93,7 @@
     .soundtrack-tools a:first-child { transform:translateY(-4px); }
     .soundtrack-tools a:first-child:hover,.soundtrack-tools a:first-child:focus-visible { color:#22ef00; border-color:#22ef00; }
     .soundtrack-tools a:last-child:hover,.soundtrack-tools a:last-child:focus-visible { color:var(--magenta); border-color:var(--magenta); }
-    .soundtrack-row { position:relative; min-height:62px; display:flex; flex-direction:column; justify-content:center; padding:12px 0 12px 32px; border-bottom:1px solid var(--line); transition:min-height .42s ease,padding .42s ease,color .36s ease; }
+    .soundtrack-row { position:relative; min-height:62px; display:flex; flex-direction:column; justify-content:center; padding:12px 0 12px 32px; border-bottom:1px solid var(--line); will-change:min-height,padding,transform; transition:min-height .42s ease,padding .42s ease,color .36s ease,transform .5s cubic-bezier(.22,.61,.36,1); }
     .soundtrack-row-head { display:grid; grid-template-columns:1fr auto; gap:18px; align-items:center; }
     .soundtrack-row h3 { font-size:18px; line-height:1.2; }
     .soundtrack-count { font:300 14px "Futura Local","DM Sans",system-ui,sans-serif; }
@@ -243,23 +243,21 @@
     const activateAlbum = activeIndex => {
         soundtrackLayout.dataset.active = String(activeIndex + 1);
         soundtrackRows.forEach(row => row.classList.toggle('is-active', Number(row.dataset.album) === activeIndex + 1));
-        const activeTop = activeIndex * 62;
+        soundtrackRows.forEach(row => { row.style.transform = ''; });
         soundtrackPreviews.forEach((item, index) => {
           if (index === activeIndex) {
-            item.style.transform = 'translateX(8px)';
+            item.style.transform = 'none';
           } else if (index < activeIndex) {
-            const targetTop = activeTop - (activeIndex - index) * 62;
-            item.style.transform = `translate(-8px, ${targetTop - index * 62}px)`;
+            item.style.transform = 'none';
           } else {
-            const distance = index - activeIndex;
-            const targetTop = activeTop + 380 + (distance - 1) * 62;
-            item.style.transform = `translate(-8px, ${targetTop - index * 62}px)`;
+            item.style.transform = 'translateY(318px)';
           }
         });
     };
     const deactivateAlbum = () => {
         soundtrackLayout.dataset.active = '';
         soundtrackRows.forEach(row => row.classList.remove('is-active'));
+        soundtrackRows.forEach(row => { row.style.transform = ''; });
         soundtrackPreviews.forEach(item => { item.style.transform = ''; });
     };
     soundtrackPreviews.forEach((preview, index) => {

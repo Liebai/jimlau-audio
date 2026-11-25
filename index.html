@@ -225,7 +225,7 @@
       </div>
     </section>
     <section class="section" id="soundtrack">
-      <div class="wrap"><div class="section-head"><div><h2>Works</h2></div><div class="soundtrack-tools"><a href="https://music.163.com/#/artist?id=99416268" target="_blank" rel="noopener" aria-label="网易云音乐"><img src="netease-cloud-logo-transparent.png" alt="网易云音乐" /></a><a href="https://open.spotify.com/artist/73y4hiJn32VtQa4zaPvgGQ" target="_blank" rel="noopener" aria-label="Spotify"><img src="spotify-logo-transparent.png" alt="Spotify" /></a></div></div>
+      <div class="wrap"><div class="section-head"><div><h2>Works</h2></div><div class="soundtrack-tools"><a href="https://music.163.com/#/artist?id=99416268" target="_blank" rel="noopener" aria-label="网易云音乐"><img src="netease-cloud-logo-transparent.png" onerror="this.onerror=null;this.src='netease-cloud-logo.webp'" alt="网易云音乐" /></a><a href="https://open.spotify.com/artist/73y4hiJn32VtQa4zaPvgGQ" target="_blank" rel="noopener" aria-label="Spotify"><img src="spotify-logo-transparent.png" onerror="this.onerror=null;this.src='spotify-logo.png'" alt="Spotify" /></a></div></div>
         <div class="soundtrack-layout" data-active="">
           <div>
             <div class="soundtrack-preview-stack" aria-label="Album previews">
@@ -375,6 +375,9 @@
         row.querySelectorAll('.soundtrack-songs a').forEach((song, songIndex) => { song.textContent = item[1][songIndex]; });
       });
       document.querySelector('#soundtrack h2').textContent = zh ? '作品' : 'Works';
+      const neteaseLink = document.querySelector('.soundtrack-tools a:first-child');
+      neteaseLink.setAttribute('aria-label', zh ? '网易云音乐' : 'NetEase Cloud Music');
+      neteaseLink.querySelector('img').alt = zh ? '网易云音乐' : 'NetEase Cloud Music';
       document.querySelector('#about .section-head .eyebrow').textContent = zh ? '实践与合作' : 'Practice & collaboration';
       document.querySelector('#about .section-head h2').textContent = zh ? '关于工作' : 'About the work';
       document.querySelector('#about .section-intro').textContent = zh ? '从最初的草稿到最终混音，音乐始终是游戏设计语言的一部分。' : "From the first sketch to the final mix, music is treated as part of the game's design language.";

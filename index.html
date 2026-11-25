@@ -11,7 +11,7 @@
   <style>
     @font-face { font-family:"Futura Local"; src:url("./FuturaStd-Light.otf") format("opentype"); font-style:normal; font-weight:300; font-display:swap; }
     @font-face { font-family:"Futura Local"; src:url("./FuturaStd-Bold.otf") format("opentype"); font-style:normal; font-weight:700; font-display:swap; }
-    :root { --ink:#f5f5f5; --muted:#9a9a9a; --line:rgba(255,255,255,.72); --bg:#000; --panel:#090909; --accent:#22ef00; --magenta:#f000df; --accent-ink:#001000; --max:1180px; }
+    :root { --ink:#f5f5f5; --muted:#9a9a9a; --line:rgba(255,255,255,.72); --bg:#000; --panel:#090909; --accent:#fff; --magenta:#fff; --accent-ink:#000; --max:1180px; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body { margin:0; background:#000; color:var(--ink); font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-weight:300; line-height:1.55; }
@@ -24,11 +24,8 @@
     .brand-mark { display:none; }
     .brand::after { content:none; }
     .nav { display:grid; grid-template-columns:repeat(2,128px); gap:16px 18px; padding:18px 26px 20px; background:#fff; }
-    .nav a { color:#000; text-decoration:none; font-size:13px; font-weight:600; text-transform:uppercase; }
-    .nav a:hover,.nav a:focus-visible { color:#000; }
-    .nav a:first-child:hover,.nav a:first-child:focus-visible { color:var(--magenta); }
-    .nav a:nth-child(2):hover,.nav a:nth-child(2):focus-visible,.nav a:nth-child(3):hover,.nav a:nth-child(3):focus-visible { color:#22ef00; }
-    .nav a:nth-child(4):hover,.nav a:nth-child(4):focus-visible { color:var(--magenta); }
+    .nav a { display:block; padding:4px 6px; color:#000; text-decoration:none; font-size:13px; font-weight:600; text-transform:uppercase; transition:background-color .08s ease,color .08s ease; }
+    .nav a:hover,.nav a:focus-visible,.nav a:first-child:hover,.nav a:first-child:focus-visible,.nav a:nth-child(2):hover,.nav a:nth-child(2):focus-visible,.nav a:nth-child(3):hover,.nav a:nth-child(3):focus-visible,.nav a:nth-child(4):hover,.nav a:nth-child(4):focus-visible { background:#000; color:#fff; }
     .nav-toggle { display:none; border:1px solid var(--line); background:none; color:var(--ink); padding:9px 11px; font:500 12px "DM Mono",monospace; }
     .hero { min-height:735px; padding:240px 0 92px; border-bottom:1px solid var(--line); }
     .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:68px; min-height:420px; align-items:center; }
@@ -39,8 +36,8 @@
     .pdf-copy p { margin:0 0 24px; white-space:nowrap; }
     .pdf-copy p:last-child { margin-bottom:0; }
     .pdf-copy .line { display:block; }
-    .pdf-copy strong { color:var(--magenta); font-weight:500; }
-    .pdf-copy .green { color:#22ef00; }
+    .pdf-copy strong { color:#fff; font-weight:500; }
+    .pdf-copy .green { color:#fff; font-size:1.35em; font-weight:500; }
     .hero-actions { display:none; }
     .button { display:inline-flex; min-height:46px; align-items:center; padding:0 18px; border:1px solid var(--line); text-decoration:none; font-size:13px; font-weight:600; transition:.2s ease; }
     .button.primary { background:var(--accent); color:var(--accent-ink); border-color:var(--accent); }
@@ -52,11 +49,15 @@
     .section { padding:92px 0; border-bottom:1px solid var(--line); }
     .section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:34px; }
     .section h2 { margin-top:12px; font-family:"Playfair Display",Georgia,serif; font-size:clamp(36px,5vw,62px); line-height:1; letter-spacing:-.04em; }
+    #work, #soundtrack { font-family:"Futura Local","DM Sans",system-ui,sans-serif; }
+    #work .section-head h2, #soundtrack .section-head h2 { font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-weight:300; }
+    #work .work-card, #soundtrack .soundtrack-row, #soundtrack .soundtrack-songs { font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-weight:300; }
+    #work .work-card h3, #soundtrack .soundtrack-row h3 { font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-weight:300; }
     .section-intro { max-width:390px; color:var(--muted); font-size:14px; }
     .work-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; align-items:start; }
     .work-grid .work-card:nth-child(even) { transform:none; }
     .work-card { min-height:330px; align-self:start; position:relative; display:flex; flex-direction:column; justify-content:end; overflow:hidden; background:var(--panel); border:1px solid var(--line); text-decoration:none; }
-    .work-card:nth-child(odd) { min-height:330px; transform:translateY(-24px); }
+    .work-card:nth-child(odd) { min-height:330px; transform:none; }
     .work-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.48; transition:transform .5s ease,opacity .3s ease; }
     .work-card::after { content:""; position:absolute; inset:35% 0 0; background:linear-gradient(transparent,rgba(8,11,10,.96)); }
     .work-card:hover img { transform:scale(1.04); opacity:.65; }
@@ -86,20 +87,19 @@
     .soundtrack-caption h3 { margin-top:22px; font-family:"Playfair Display",Georgia,serif; font-size:30px; line-height:1.1; }
     .soundtrack-caption p { max-width:280px; margin-top:10px; color:var(--muted); font-size:14px; }
     .platforms { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
-    .platforms a { color:var(--ink); border-bottom:1px solid rgba(199,239,84,.4); text-decoration:none; font:12px "DM Mono",monospace; }
+    .platforms a { color:var(--ink); border-bottom:1px solid rgba(255,255,255,.4); text-decoration:none; font:12px "DM Mono",monospace; }
     .soundtrack-list { position:relative; border-top:1px solid var(--line); }
-    .soundtrack-tools { display:flex; justify-content:flex-end; align-items:flex-end; gap:12px; margin:0 0 4px auto; }
+    .soundtrack-tools { display:flex; justify-content:flex-end; align-items:center; gap:24px; margin:0 0 4px auto; }
     .soundtrack-tools a { padding:5px 8px; border:1px solid var(--line); color:var(--ink); text-decoration:none; font:300 12px "Futura Local","DM Sans",system-ui,sans-serif; }
-    .soundtrack-tools a:first-child { transform:translateY(-4px); }
-    .soundtrack-tools a:first-child:hover,.soundtrack-tools a:first-child:focus-visible { color:#22ef00; border-color:#22ef00; }
-    .soundtrack-tools a:last-child:hover,.soundtrack-tools a:last-child:focus-visible { color:var(--magenta); border-color:var(--magenta); }
+    .soundtrack-tools a:first-child:hover,.soundtrack-tools a:first-child:focus-visible { color:#fff; border-color:#fff; }
+    .soundtrack-tools a:last-child:hover,.soundtrack-tools a:last-child:focus-visible { color:#fff; border-color:#fff; }
     .soundtrack-row { position:relative; min-height:62px; display:flex; flex-direction:column; justify-content:center; padding:12px 0 12px 32px; border-bottom:1px solid var(--line); will-change:min-height,padding,transform; transition:min-height .42s ease,padding .42s ease,color .36s ease,transform .5s cubic-bezier(.22,.61,.36,1); }
     .soundtrack-row-head { display:grid; grid-template-columns:1fr auto; gap:18px; align-items:center; }
     .soundtrack-row h3 { font-size:18px; line-height:1.2; }
     .soundtrack-count { font:300 14px "Futura Local","DM Sans",system-ui,sans-serif; }
     .soundtrack-row.is-active { min-height:380px; display:flex; flex-direction:column; justify-content:flex-start; padding:18px 0 22px 32px; color:var(--ink); }
     .soundtrack-row.is-active .soundtrack-row-head { align-items:start; }
-    .soundtrack-row.is-active h3,.soundtrack-row.is-active .soundtrack-count { color:var(--magenta); }
+    .soundtrack-row.is-active h3,.soundtrack-row.is-active .soundtrack-count { color:#fff; }
     .soundtrack-row.is-active h3 { font-size:34px; line-height:1.05; }
     .soundtrack-songs { display:flex; flex-wrap:wrap; gap:7px 20px; max-height:0; margin-top:0; overflow:hidden; opacity:0; transform:translateY(-5px); transition:max-height .42s ease,margin-top .42s ease,opacity .32s ease,transform .42s ease; }
     .soundtrack-row.is-active .soundtrack-songs { max-height:120px; margin-top:12px; opacity:1; transform:translateY(0); }
@@ -117,35 +117,38 @@
     #about .section-intro { display:none; }
     #about .facts { display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start; }
     #about .fact { width:auto; min-height:0; padding:0; border:0; background:none; text-align:left; }
-    #about .fact h3 { margin:0 0 16px; color:var(--ink); font:700 22px/1 "Futura Local","DM Sans",system-ui,sans-serif; letter-spacing:-.04em; text-transform:uppercase; }
+    #about .fact h3 { margin:0 0 16px; color:var(--ink); font:300 22px/1 "Futura Local","DM Sans",system-ui,sans-serif; letter-spacing:-.04em; text-transform:uppercase; }
     #about .fact:first-child { order:2; }
     #about .fact:last-child { order:1; }
     #about .fact:last-child h3 { display:block; }
     #about .chips { justify-content:flex-start; gap:8px; margin-top:0; }
     #about .chip { min-width:0; padding:9px 12px; border:1px solid var(--ink); color:var(--ink); font-size:14px; transition:color .2s ease,border-color .2s ease,background .2s ease; }
-    #about .chip:hover,#about .chip:focus-visible { color:var(--magenta); border-color:var(--magenta); background:transparent; }
+    #about .chip:hover,#about .chip:focus-visible { color:#fff; border-color:#fff; background:transparent; }
     #about .fact:first-child .chip:nth-child(even):hover,#about .fact:first-child .chip:nth-child(even):focus-visible { color:var(--accent); border-color:var(--accent); }
     #about .fact:last-child .chip:nth-child(2):hover,#about .fact:last-child .chip:nth-child(2):focus-visible { color:var(--accent); border-color:var(--accent); }
     .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:22px; }
     .chip { padding:8px 12px; border:1px solid var(--line); color:var(--muted); font-size:13px; }
     .contact { position:relative; display:flex; min-height:420px; align-items:center; justify-content:center; overflow:hidden; text-align:center; background:#000; }
+    #contact, #contact .contact-content, #contact .contact-title, #contact .contact-link { font-family:"Futura Local","DM Sans",system-ui,sans-serif; font-weight:300; }
     .contact::before { content:""; position:absolute; inset:0; background:linear-gradient(rgba(0,0,0,.34),rgba(0,0,0,.44)),url("contact-piano.jpg") center/cover no-repeat; filter:grayscale(1) contrast(1.08) brightness(.78); }
     .contact > * { position:relative; z-index:1; }
     #contact { padding-top:0; padding-bottom:0; }
     .contact-content { display:flex; flex-direction:column; align-items:center; gap:34px; }
-    .contact-title { color:#fff; font:700 clamp(44px,7vw,88px)/.95 "Futura Local","DM Sans",system-ui,sans-serif; letter-spacing:-.06em; text-transform:uppercase; }
+    .contact-title { color:#fff; font:300 clamp(44px,7vw,88px)/.95 "Futura Local","DM Sans",system-ui,sans-serif; letter-spacing:-.06em; text-transform:uppercase; }
     .contact-links { display:flex; align-items:baseline; justify-content:center; gap:24px; flex-wrap:wrap; }
     .contact-copy { max-width:580px; color:var(--muted); font-size:20px; }
     .contact-link { display:inline-block; margin-top:0; color:var(--ink); font:300 clamp(18px,2.6vw,32px) "Futura Local","DM Sans",system-ui,sans-serif; text-decoration:none; word-break:break-word; }
     .contact-instagram { color:var(--ink); font:300 clamp(18px,2.6vw,32px) "Futura Local","DM Sans",system-ui,sans-serif; text-decoration:none; }
-    .contact-link:hover,.contact-link:focus-visible { color:var(--magenta); }
-    .contact-instagram:hover,.contact-instagram:focus-visible { color:#ff3b30; }
+    .contact-link:hover,.contact-link:focus-visible { color:#fff; }
+    .contact-instagram:hover,.contact-instagram:focus-visible { color:#fff; }
     footer { padding:30px 0 44px; color:var(--muted); font:300 14px "Futura Local","DM Sans",system-ui,sans-serif; }
     footer .wrap { display:flex; justify-content:space-between; gap:20px; }
     .footer-links { display:flex; gap:8px; }
     .footer-links a { display:inline-flex; min-width:48px; height:32px; align-items:center; justify-content:center; border:1px solid var(--line); color:var(--ink); text-decoration:none; font:700 14px/1 "Futura Local","DM Sans",system-ui,sans-serif; }
-    .footer-links a:first-child:hover,.footer-links a:first-child:focus-visible { color:#22ef00; border-color:#22ef00; }
-    .footer-links a:last-child:hover,.footer-links a:last-child:focus-visible { color:var(--magenta); border-color:var(--magenta); }
+    .footer-links svg { display:block; width:22px; height:18px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
+    .footer-links a:first-child svg { width:25px; height:18px; fill:currentColor; stroke:none; }
+    .footer-links a:first-child:hover,.footer-links a:first-child:focus-visible { color:#fff; border-color:#fff; }
+    .footer-links a:last-child:hover,.footer-links a:last-child:focus-visible { color:#fff; border-color:#fff; }
     .nav-toggle { display:none; }
   </style>
 </head>
@@ -184,7 +187,7 @@
       </div>
     </section>
     <section class="section" id="work">
-      <div class="wrap"><div class="section-head"><div><div class="eyebrow">Selected work</div><h2>Showcase</h2></div><p class="section-intro">A selection of music, analysis and moving-image work across games, film and performance.</p></div>
+      <div class="wrap"><div class="section-head"><div><h2>Showcase</h2></div><p class="section-intro">A selection of music, analysis and moving-image work across games, film and performance.</p></div>
         <div class="work-grid">
           <a class="work-card" href="https://www.youtube.com/watch?v=VHpI2w73UG4" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/VHpI2w73UG4/hqdefault.jpg" alt="Wuthering Waves cinematic" /><div class="work-content"><span class="work-number">01 / GAME MUSIC</span><h3>Wuthering Waves — Faded Colors of the Past</h3><p>Cinematic music design for a TGA award-winning project.</p></div></a>
           <a class="work-card" href="https://www.bilibili.com/video/BV1ndYoeBEWc/" target="_blank" rel="noopener"><img src="https://jimlau.audio/thumb_jazz.jpg" alt="Jazz piano analysis" /><div class="work-content"><span class="work-number">02 / EDUCATION</span><h3>Jazz piano analysis &amp; improvisation</h3><p>An open class on McCoy Tyner, harmony and learning to improvise.</p></div></a>
@@ -194,7 +197,7 @@
       </div>
     </section>
     <section class="section" id="soundtrack">
-      <div class="wrap"><div class="section-head"><div><div class="eyebrow">Selected works</div><h2>Works</h2></div><div class="soundtrack-tools"><a href="https://music.163.com/#/artist?id=99416268" target="_blank" rel="noopener">网易云音乐</a><a href="https://open.spotify.com/artist/4NJxtQzTTeO3ObGlBcxVAh" target="_blank" rel="noopener">Spotify</a></div></div>
+      <div class="wrap"><div class="section-head"><div><h2>Works</h2></div><div class="soundtrack-tools"><a href="https://music.163.com/#/artist?id=99416268" target="_blank" rel="noopener">网易云音乐</a><a href="https://open.spotify.com/artist/73y4hiJn32VtQa4zaPvgGQ" target="_blank" rel="noopener">Spotify</a></div></div>
         <div class="soundtrack-layout" data-active="">
           <div>
             <div class="soundtrack-preview-stack" aria-label="Album previews">
@@ -229,10 +232,10 @@
         </div>
       </div>
     </section>
-    <section class="section" id="about"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Practice &amp; collaboration</div><h2>About the work</h2></div><p class="section-intro">From the first sketch to the final mix, music is treated as part of the game's design language.</p></div><div class="facts"><div class="fact"><h3>Abilities</h3><div class="chips"><span class="chip">Level music design</span><span class="chip">Ableton</span><span class="chip">Cubase</span><span class="chip">Mixing</span><span class="chip">Jazz piano</span><span class="chip">English / Deutsch</span></div></div><div class="fact"><h3>Partners</h3><div class="chips"><span class="chip">Wuthering Waves</span><span class="chip">Dove</span><span class="chip">Huawei</span><span class="chip">Shangri-La — Band Coordination</span></div></div></div></div></section>
+    <section class="section" id="about"><div class="wrap"><div class="section-head"><div><div class="eyebrow">Practice &amp; collaboration</div><h2>About the work</h2></div><p class="section-intro">From the first sketch to the final mix, music is treated as part of the game's design language.</p></div><div class="facts"><div class="fact"><h3>Abilities</h3><div class="chips"><span class="chip">Ableton</span><span class="chip">Cubase</span><span class="chip">Mixing</span><span class="chip">Jazz piano</span><span class="chip">English / Deutsch</span></div></div><div class="fact"><h3>Partners</h3><div class="chips"><span class="chip">Wuthering Waves</span><span class="chip">Dove</span><span class="chip">Huawei</span><span class="chip">Shangri-La — Band Coordination</span></div></div></div></div></section>
     <section class="section" id="contact"><div class="wrap contact"><div class="contact-content"><h2 class="contact-title">Contact</h2><div class="contact-links"><a class="contact-link" href="mailto:liujunyi.lb@foxmail.com">liujunyi.lb@foxmail.com</a></div></div></div></section>
   </main>
-  <footer><div class="wrap"><span>© 2026 Jim Lau · Game Design</span><span class="footer-links"><a href="https://space.bilibili.com/1533479443" target="_blank" rel="noopener" aria-label="Bilibili">BI</a><a href="https://www.instagram.com/liujunyileo/" target="_blank" rel="noopener" aria-label="Instagram">IN</a></span></div></footer>
+  <footer><div class="wrap"><span>© 2026 Jim Lau · Game Design</span><span class="footer-links"><a href="https://space.bilibili.com/1533479443" target="_blank" rel="noopener" aria-label="Bilibili"><svg viewBox="0 0 64 40" aria-hidden="true"><path d="M16 8 10 2m38 6 6-6M8 13h48v19a5 5 0 0 1-5 5H13a5 5 0 0 1-5-5V13Z"/><circle cx="24" cy="24" r="3" fill="#000"/><circle cx="40" cy="24" r="3" fill="#000"/><path d="M18 32h28" stroke="#000" stroke-width="3"/></svg></a><a href="https://www.instagram.com/liujunyileo/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a></span></div></footer>
   <script>
     const toggle = document.querySelector('.nav-toggle'); const nav = document.querySelector('.nav');
     toggle.addEventListener('click', () => { const open = nav.classList.toggle('is-open'); toggle.setAttribute('aria-expanded', String(open)); });
